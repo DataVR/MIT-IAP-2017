@@ -15,20 +15,20 @@
     <script>
     var elements = [];
     for (var i = -10; i < 10; i++) {
-      elements.append(m('a-entity', {
+      elements.push(m('a-entity', {
         'bmfont-text': 'text: '+i+' 0 0;',
         'position': i+' 0 0'
       }, ''));
-      elements.append(m('a-entity', {
+      elements.push(m('a-entity', {
         'bmfont-text': 'text: 0 '+i+' 0;',
         'position': '0 ' + i + ' 0'
       }, ''));
-      elements.append(m('a-entity', {
+      elements.push(m('a-entity', {
         'bmfont-text': 'text: 0 0 '+i+';',
         'position': '0 0 ' + i
       }, ''));
     }
-    elements.append(m('a-sky', {color: '#ECECEC'}, ''));
+    elements.push(m('a-sky', {color: '#ECECEC'}, ''));
     
     m.render(document.getElementById('main'), elements);
     </script>
