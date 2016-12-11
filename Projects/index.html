@@ -25,28 +25,23 @@
     
     <script>
       var axisCount = 10;
-      var axisLocs = new Array(axisCount * 2 + 1);
-      for (var i = 0; i < axisCount * 2 + 1; i++) {
-        axisLocs[i] = i - 10;
+      var axisLocs = new Array(axisCount * 3);
+      for (var i = 0; i < axisCount; i++) {
+        axisLocs[i] = i + " 0 0";
+      }
+      for (var i = 0; i < axisCount; i++) {
+        axisLocs[i+axisCount] = "0 "+i+" 0";
+      }
+      for (var i = 0; i < axisCount; i++) {
+        axisLocs[i+axisCount*2] = "0 0 "+i;
       }
       
       d3.select("a-scene")
+        .selectAll("a-entity")
         .data(axisLocs)
         .enter().append("a-entity")
-        .attr("bmfont-text", function(d) { return "text: "+d; })
-        .attr("position", function(d) { return "0 0 "+d; });
-      
-      d3.select("a-scene")
-        .data(axisLocs)
-        .enter().append("a-entity")
-        .attr("bmfont-text", function(d) { return "text: "+d; })
-        .attr("position", function(d) { return "0 "+d+" 0"; });
-      
-      d3.select("a-scene")
-        .data(axisLocs)
-        .enter().append("a-entity")
-        .attr("bmfont-text", function(d) { return "text: "+d; })
-        .attr("position", function(d) { return d+" 0 0"; });
+        .attr("bmfont-text", function(d) { return d; })
+        .attr("position", function(d) { return d; });
       
     </script>
   </body>
