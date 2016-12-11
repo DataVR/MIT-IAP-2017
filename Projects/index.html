@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Hello World! - A-Frame</title>
     <meta name="description" content="Hello, World! - A-Frame">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
     <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.min.js"></script>
   </head>
@@ -21,5 +22,32 @@
       
       <a-entity bmfont-text="text: Hello world" position="0 2 -2"></a-entity>
     </a-scene>
+    
+    <script>
+      var axisCount = 10;
+      var axisLocs = new Array(axisCount * 2 + 1);
+      for (var i = 0; i < axisCount * 2 + 1; i++) {
+        axisLocs[i] = i - 10;
+      }
+      
+      d3.select("a-scene")
+        .data(axisLocs)
+        .enter().append("a-entity")
+        .attr("bmfont-text", function(d) { return "text: "+d; })
+        .attr("position", function(d) { return "0 0 "+d; });
+      
+      d3.select("a-scene")
+        .data(axisLocs)
+        .enter().append("a-entity")
+        .attr("bmfont-text", function(d) { return "text: "+d; })
+        .attr("position", function(d) { return "0 "+d+" 0"; });
+      
+      d3.select("a-scene")
+        .data(axisLocs)
+        .enter().append("a-entity")
+        .attr("bmfont-text", function(d) { return "text: "+d; })
+        .attr("position", function(d) { return d+" 0 0"; });
+      
+    </script>
   </body>
 </html>
