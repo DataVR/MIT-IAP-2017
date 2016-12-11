@@ -40,7 +40,7 @@
         .selectAll("a-entity")
         .data(axisLocs)
         .enter().append("a-entity")
-        .attr("bmfont-text", function(d) { return d; })
+        .attr("bmfont-text", function(d) { return "text: "+d+";"; })
         .attr("position", function(d) { return d; });
       
     </script>
