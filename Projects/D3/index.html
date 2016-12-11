@@ -5,7 +5,7 @@
   <script src="https://aframe.io/releases/latest/aframe.min.js"></script>
   <style>
     body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; background-color: white;}
-   
+    
   </style>
 </head>
 
@@ -20,11 +20,15 @@
       <a-sky color="#c8f8e0"></a-sky>
   </a-scene>
   <script>
+    var manName = "jerry";
+    
+    console.log(manName);
     
     // fake data
     var data = [ 10, 20, 30, 15, 25, 35, 40,
                 45, 50, 70, 100, 120, 130,
                12, 18, 22, 29, 33, 44, 59, 200]
+    
     
     // we scale the height of our bars using d3's linear scale
     var hscale = d3.scale.linear()
