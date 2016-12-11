@@ -6,30 +6,29 @@
     <meta name="description" content="Hello, World! - A-Frame">
     <script src="https://aframe.io/releases/0.3.2/aframe.min.js"></script>
     <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/mithril/0.2.5/mithril.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mithril/0.2.5/mithril.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   </head>
   <body>
     <a-scene id="main">
     </a-scene>
     
     <script>
+
     var elements = [];
-    for (var i = -10; i < 10; i++) {
-      elements.push(m('a-entity', {
-        'bmfont-text': 'text: '+i+' 0 0;',
-        'position': i+' 0 0'
-      }, ''));
-      elements.push(m('a-entity', {
-        'bmfont-text': 'text: 0 '+i+' 0;',
-        'position': '0 ' + i + ' 0'
-      }, ''));
-      elements.push(m('a-entity', {
-        'bmfont-text': 'text: 0 0 '+i+';',
-        'position': '0 0 ' + i
-      }, ''));
+
+    for (var x = 0; x < 10; x++) {
+        for (var y = 0; y < 10; y++) {
+            for (var z = 0; z < 10; z++) {
+                elements.append(m('a-entity', {
+                    'bmfont-text': 'text: '+x+' '+y+' '+z+';',
+                    position: x+' '+y+' '+z
+                }, ''));
+            }
+        }
     }
-    elements.push(m('a-sky', {color: '#ECECEC'}, ''));
-    
+    elements.append(m('a-sky', {color: '#ECECEC'}, ''));
+
     m.render(document.getElementById('main'), elements);
     </script>
   </body>
