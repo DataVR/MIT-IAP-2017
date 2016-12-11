@@ -19,9 +19,9 @@
       <a-sky color="#c8f8e1"></a-sky>
   </a-scene>
   <script>
-    var manName = "jerry";
-    
-    console.log(manName);
+    d3.csv('data.csv', function(data) {
+      console.log(data);
+    });
     
     // fake data
     var data = [ 10, 20, 30, 15, 25, 35, 40,
