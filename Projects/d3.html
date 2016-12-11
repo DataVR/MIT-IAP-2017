@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script src="https://aframe.io/releases/latest/aframe.min.js"></script>
+  <style>
+    body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; background-color: white;}
+   
+  </style>
+</head>
+
+<body>
+  <a-scene>
+      <!-- Camera with customized cursor -->
+      <a-camera position="0 1.8 0" cursor-visible="true" cursor-scale="2" cursor-color="#4CC3D9" cursor-offset="2" cursor-maxdistance="100" cursor-opacity="0.5" cursor-fuse="true"></a-camera>
+      <a-light color="#da47da" position="0 5 0" type="ambient"></a-light>
+    	<a-entity camera look-controls wasd-controls></a-entity>
+    	<a-entity light="type: point; color: #EEE; intensity: 0.5" position="0 3 0"></a-entity>
+      <!-- Sky -->
+      <a-sky color="#c8f8e0"></a-sky>
+  </a-scene>
+  <script>
+    
+    // fake data
+    var data = [ 10, 20, 30, 15, 25, 35, 40,
+                45, 50, 70, 100, 120, 130,
+               12, 18, 22, 29, 33, 44, 59, 200]
+    
+    // we scale the height of our bars using d3's linear scale
+    var hscale = d3.scale.linear()
+    	.domain([0, d3.max(data)])
+    	.range([0, 3])
+    
+    // we select the scene object just like an svg
+    var scene = d3.select("a-scene")
+    
+    // we use d3's enter/update/exit pattern to draw and bind our dom elements
+    var bars = scene.selectAll("a-cube.bar").data(data)
+    bars.enter().append("a-cube").classed("bar", true)
+    // we set attributes on our cubes to determine how they are rendered
+    bars.attr({
+      position: function(d,i) {
+        // cubes are positioned by their center so we
+        // offset for their height
+        var y = 1 + hscale(d)/2;
+        // lets place the bars all around our camera
+        var radius = 5;
+        //var x = i - data.length/2;
+        var x = radius * Math.cos(i/data.length * 2 * Math.PI)
+        var z = radius * Math.sin(i/data.length * 2 * Math.PI)
+        return x + " " + y + " " + z
+      },
+      rotation: function(d,i) {
+        var x = 0;
+        var z = 0;
+        var y = -(i/data.length)*360;
+        return x + " " + y + " " + z
+      },
+      width: function(d) { return 0.5},
+      depth: function(d) { return 0.9},
+      height: function(d) { return hscale(d)},
+      opacity: function(d,i) { return 0.6 + (i/data.length) * 0.4},
+      //metalness: function(d,i) { return i/data.length}
+    })
+    .on("click", function(d,i) {
+      console.log("click", i,d)
+    })
+    .on("mouseenter", function(d,i) {
+      // this event gets fired continuously as long as the cursor
+      // is over the element. we only want trigger our animation the first time
+      if(this.hovering) return;
+      console.log("hover", i,d)
+      this.hovering = true;
+      d3.select(this).transition().duration(1000)
+      .attr({
+        metalness: 0.5,
+        width: 2
+      })
+    })
+    .on("mouseleave", function(d,i) {
+      console.log("leave",i,d)
+      this.hovering = false;
+      d3.select(this).transition()
+      .attr({
+        metalness: 0,
+        width: 0.5
+      })
+    })    
+    
+  </script>
+</body>
