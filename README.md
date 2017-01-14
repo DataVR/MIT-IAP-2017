@@ -1,6 +1,3 @@
 # DataVR
 
-
-For the GitHub Pages site, see: http://DataVR.xyz
-
-For the web interface of this repo, see:  https://datavr.github.io/MIT-IAP-2017
+UPDATE: The content from this repo is now being developed at: https://github.com/ComputationalLaw/MIT-IAP-2017
